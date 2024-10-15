@@ -6,7 +6,7 @@ import { XMarkIcon, Bars3Icon } from '@heroicons/react/24/outline';
 
 const NavBar = (props : any) => {
   return (
-    <Popover className="flex items-center px-[10%] p-2 h-24 bg-transparent">
+    <Popover className="flex items-center px-[5%] p-2 h-24 bg-transparent">
     {/* Navbar */}
     <div className='flex flex-row grow items-center'>
     <img src={Logo} alt="logo" className="h-[40px] w-[40px] mr-4" />
@@ -16,27 +16,27 @@ const NavBar = (props : any) => {
     </div>
 
     <div className="grow">
-      <div className="hidden sm:flex items-right justify-right gap-2 md:gap-8 font-sans ml-[5%]">
+      <div className="hidden sm:flex items-right justify-end gap-2 md:gap-8 font-sans ">
         <a
          
-          className="font-normal text-[20px] hover:text-[#095831]"
+          className="font-normal text-[25px] hover:text-[#095831]"
         >
           Home
         </a>
         <a
-          className="font-normal text-[20px] hover:text-[#095831]"
+          className="font-normal text-[25px] hover:text-[#095831]"
         >
           Service
         </a>
         <a
         
-          className="font-normal text-[20px] hover:text-[#095831]"
+          className="font-normal text-[25px] hover:text-[#095831]"
         >
           About Us
         </a>
         <a
          
-          className="font-normal text-[20px] hover:text-[#095831]"
+          className="font-normal text-[25px] hover:text-[#095831]"
         >
           Contact Us
         </a>
