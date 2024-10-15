@@ -6,7 +6,7 @@ import { XMarkIcon, Bars3Icon } from '@heroicons/react/24/outline';
 
 const NavBar = (props : any) => {
   return (
-    <Popover className="flex items-center px-[5%] h-24 bg-transparent">
+    <Popover className="flex items-center px-[1%] h-24 bg-transparent">
     {/* Navbar */}
     <div className='flex flex-row grow items-center'>
     <img src={Logo} alt="logo" className="h-[60px] w-[60px] mr-4 " />
