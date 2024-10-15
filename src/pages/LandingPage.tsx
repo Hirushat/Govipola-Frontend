@@ -11,8 +11,7 @@ const LandingPage = () => {
       style={{ backgroundImage: `url(${BackgroundImg})` }}
     >
         <NavBar  topic="Price List"/>
-        <SignupAndLogin/>
-        <LanguageButton/>
+     
     </div>
   );
 };
