@@ -45,7 +45,7 @@ const LoginPage = () => {
       );
 
       // Destructuring the object
-      const { passWord, userType, id, name, address, city, divisionName } = response.data;
+      const { passWord, phoneNumber, userType, id, name, address, city, divisionName } = response.data;
       
       if(passWord === selectedPassword){
         // Set user data in context
@@ -56,7 +56,8 @@ const LoginPage = () => {
             name, 
             address, 
             city, 
-            divisionName 
+            divisionName,
+            phoneNumber
           });
 
         if(userType === "farmer"){
