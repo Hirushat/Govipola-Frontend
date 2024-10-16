@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import logo from "../assets/Logo.png";
 import userImg from "../assets/user.png";
 import axios from "axios";
-import { Link, Route, useNavigate } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../components/UserContext"; 
 import backBtn from '../assets/backBtn.png'
 
 const LoginPage = () => {
@@ -15,7 +15,18 @@ const LoginPage = () => {
 
   const navigate = useNavigate();
 
+   // Access UserContext
+   const userContext = useContext(UserContext);
+
+   // Check if the context is defined
+   if (!userContext) {
+     throw new Error("LoginPage must be used within a UserProvider");
+   }
+ 
+   const { setUser } = userContext; // Destructure setUser from context
+
   async function loginValidate() {
+    
     // Check if any required field is empty
     if (!selectedUsername || !selectedPassword) {
       alert("All fields are required.");
@@ -34,11 +45,20 @@ const LoginPage = () => {
       );
 
       // Destructuring the object
-      const { passWord, userType } = response.data;
-
+      const { passWord, userType, id, name, address, city, divisionName } = response.data;
+      
       if(passWord === selectedPassword){
-        setUsername("");
-        setPassword("")
+        // Set user data in context
+        setUser({ 
+            username: selectedUsername, 
+            userType, 
+            id, 
+            name, 
+            address, 
+            city, 
+            divisionName 
+          });
+
         if(userType === "farmer"){
             console.log(userType)
             navigate("/farmer/homepage");
@@ -55,6 +75,7 @@ const LoginPage = () => {
     }else{
         console.log("username not exist")
     }
+    
   }
 
   return (
