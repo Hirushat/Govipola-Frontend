@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import logo from "../assets/Logo.png";
 import userImg from "../assets/user.png";
 import axios from "axios";
-import { Link, Route } from "react-router-dom";
+import { Link, Route, useNavigate } from "react-router-dom";
 
 import backBtn from '../assets/backBtn.png'
 
@@ -12,6 +12,8 @@ const LoginPage = () => {
 
   const handleUsernameChange = (e: any) => setUsername(e.target.value);
   const handlePasswordChange = (e: any) => setPassword(e.target.value);
+
+  const navigate = useNavigate();
 
   async function loginValidate() {
     // Check if any required field is empty
@@ -35,12 +37,17 @@ const LoginPage = () => {
       const { passWord, userType } = response.data;
 
       if(passWord === selectedPassword){
+        setUsername("");
+        setPassword("")
         if(userType === "farmer"){
-            
+            console.log(userType)
+            navigate("/farmer/homepage");
         }else if(userType === "middleman"){
-            
+            console.log(userType)
+            navigate("/middleman/homepage");
         }else{
-            
+            console.log(userType)
+            navigate("/miller/homepage");
         }
       }else{
         console.log("Password incorrect")
