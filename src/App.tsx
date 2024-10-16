@@ -1,18 +1,19 @@
-import { useState } from 'react'
+import react from 'react'
 import './App.css'
+import { Route, Routes } from 'react-router-dom'
 import LandingPage from './pages/LandingPage'
-import NavBar from './components/NavBar'
-import Banner from './components/homePage/banner'
-import HomePage from './pages/FarmerHomePage'
-import AboutUs from './pages/AboutUs'
+import LoginPage from './pages/LoginPage'
 import SignUp from './pages/SignUp'
-import SelectOption from './components/homePage/SelectOption'
-import WholeSellerHomePage from './pages/WholeSellerHomePage'
 function App() {
 
   return (
     <div className='flex flex-col'>
-       <SignUp/>
+       <Routes>
+        <Route path='/' element={<LandingPage/>}/>
+        
+        <Route path='/login' element={<LoginPage/>}/>
+        <Route path='/signup' element={<SignUp/>}/>
+       </Routes>
     </div>
   )
 }

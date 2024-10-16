@@ -1,131 +1,132 @@
 import React, { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import BackBtn from "../assets/backBtn.png";
-import SignupBtn from "../../src/assets/signupBtn.png"
+import SignupBtn from "../../src/assets/signupBtn.png";
 
 const SignUp = () => {
-  
   const [selectedUser, setSelectedUser] = useState("");
   const [selectedDivision, setSelectedDivision] = useState("");
-  const [username, setUsername] = useState('');
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
+  const [number, setNumber] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [usernameExists, setUsernameExists] = useState(false);
 
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-  const handleUsernameChange = (e: any) => {
-    setUsername(e.target.value);
-  };
-
-  const handleNameChange = (e: any) => {
-    setName(e.target.value);
-  };
-
-  const handleNumberChange = (e: any) => {
-    setNumber(e.target.value);
-  };
-  const handleAddressChange = (e: any) => {
-    setAddress(e.target.value);
-  };
-  const handleCityChange = (e: any) => {
-    setCity(e.target.value);
-  };
-  const handlePasswordChange = (e: any) => {
-    setPassword(e.target.value);
-  };
-  const handleConfirmPasswordChange = (e: any) => {
+  // Handlers for input fields
+  const handleUsernameChange = (e: any) => setUsername(e.target.value);
+  const handleNameChange = (e: any) => setName(e.target.value);
+  const handleNumberChange = (e: any) => setNumber(e.target.value);
+  const handleAddressChange = (e: any) => setAddress(e.target.value);
+  const handleCityChange = (e: any) => setCity(e.target.value);
+  const handlePasswordChange = (e: any) => setPassword(e.target.value);
+  const handleConfirmPasswordChange = (e: any) =>
     setConfirmPassword(e.target.value);
-  };
-  const handleChange = (event: any) => {
-    setSelectedUser(event.target.value); // Update the selected value
-  };
+  const handleChange = (event: any) => setSelectedUser(event.target.value);
+  const handleChangeDivision = (event: any) =>
+    setSelectedDivision(event.target.value);
 
-  const handleChangeDivision = (event: any) => {
-    setSelectedDivision(event.target.value); // Update the selected value
-  };
-
-
-  
-  // Function to handle API call
+  // Function to handle API call and Add User
   async function AddUser() {
     try {
+      const isValid = await validate(); // Validate the form before proceeding
 
-      validate();
-        
-      let response;
+      if (!isValid) {
+        return; // Stop if validation fails
+      }
 
       // Prepare data to send to the backend
       const userData = {
         userType: selectedUser,
-        name: name,
-        address : address,
-        phoneNumber : number,
-        city : city,
-        divisionName : selectedDivision,
-        passWord : password,
-        userName : username,
+        name,
+        address,
+        phoneNumber: number,
+        city,
+        divisionName: selectedDivision,
+        passWord: password,
+        userName: username,
       };
-  
-      // Clear any errors
-      setError('');
-      
-      response = await axios.post('http://localhost:8080/farmer/add-farmer', userData );
 
-      
-      
-
+      // Send POST request to the backend to add the user
+      const response = await axios.post(
+        "http://localhost:8080/farmer/add-farmer",
+        userData
+      );
+      if (response.status === 200) {
+        setSuccess("User added successfully!");
+        alert(success);
+        // Clear the form after success
+        setSelectedUser("");
+        setName("");
+        setAddress("");
+        setNumber("");
+        setCity("");
+        setSelectedDivision("");
+        setPassword("");
+        setUsername("");
+        setConfirmPassword("");
+      }
     } catch (err) {
-      // Handle error
-      console.error('Error adding user:', err);
-      setError('Failed to add user');
+      console.error("Error adding user:", err);
+      setError("Failed to add user");
     }
   }
 
+  // Validation function
   async function validate() {
     try {
-      // Make the GET request to check if the user exists
-      const response = await axios.get(`http://localhost:8080/farmer/is-exist-user/${username}`);
-      
-      // Assuming the API returns a boolean value indicating username existence
-      setUsernameExists(response.data);
+      // Check if any required field is empty
+      if (
+        !selectedUser ||
+        !name ||
+        !address ||
+        !number ||
+        !city ||
+        !selectedDivision ||
+        !username ||
+        !password ||
+        !confirmPassword
+      ) {
+        alert("All fields are required.");
+        return false;
+      }
 
-      // If usernameExists is true, show a message to the user
+      // Check if the username exists
+      const response = await axios.get(
+        `http://localhost:8080/farmer/is-exist-user/${username}`
+      );
+
       if (response.data === true) {
-        alert('Username already exists');
-      } else {
-        alert('Error');
+        alert("Username already exists");
+        return false; // Return false to stop the form submission
       }
 
-      if(password === confirmPassword ){
-        
-        if(password.length < 8){
-          alert("Pasword must be atleast 8 Characters");
-        }else{
-          
-        }
-        
-      }else{
-        alert("Password Should Be Same")
+      // Password validation
+      if (password !== confirmPassword) {
+        alert("Passwords do not match");
+        return false;
       }
 
+      if (password.length < 8) {
+        alert("Password must be at least 8 characters long");
+        return false;
+      }
+
+      return true; // Validation passed
     } catch (err) {
-      // Handle error
-      console.error('Error checking username:', err);
-      setError('Failed to check username');
+      console.error("Error during validation:", err);
+      setError("Failed to validate input");
+      return false; // Return false on error
     }
   }
 
-
-  
-
   return (
-    <form className="grid grid-cols-2 bg-gradient-to-b from-[#2AF35F] via-[#49A343] to-[#ADDA3C] h-screen">
+    <form className="grid grid-cols-2 bg-gradient-to-b from-[#A5C9AF] via-[#749871] to-[#CCE887] h-screen">
       <div className="flex flex-col px-[15%]">
         <button>
           <img
@@ -136,7 +137,6 @@ const SignUp = () => {
         </button>
 
         <div className="flex flex-col items-start ml-[5%] mt-[5%]">
-          {/* Dropdown Selector */}
           <label htmlFor="userType" className="mb-2 text-[25px] font-semibold">
             Select User Type:
           </label>
@@ -145,7 +145,7 @@ const SignUp = () => {
             className="border border-gray-300 rounded-md px-[20px] py-[5px] text-[25px] rounded-r-xl rounded-l-xl"
             value={selectedUser}
             onChange={handleChange}
-            required
+            
           >
             <option value="" className="text-[15px]" disabled>
               Select an option
@@ -170,7 +170,7 @@ const SignUp = () => {
             placeholder=" Name"
             value={name}
             onChange={handleNameChange}
-            required
+            
           />
           <input
             type="text"
@@ -180,7 +180,7 @@ const SignUp = () => {
             placeholder=" Mobile Number"
             value={number}
             onChange={handleNumberChange}
-            required
+            
           />
           <input
             type="text"
@@ -190,7 +190,7 @@ const SignUp = () => {
             placeholder=" Address"
             value={address}
             onChange={handleAddressChange}
-            required
+            
           />
           <input
             type="text"
@@ -200,10 +200,9 @@ const SignUp = () => {
             placeholder=" City"
             value={city}
             onChange={handleCityChange}
-            required
+            
           />
           <div className="flex flex-col items-start ml-[1%] mt-[1%]">
-            {/* Dropdown Selector */}
             <label
               htmlFor="userType"
               className="mb-2 text-[25px] font-semibold"
@@ -215,7 +214,7 @@ const SignUp = () => {
               className="border border-gray-300 rounded-md px-[20px] py-[5px] text-[25px] rounded-r-xl rounded-l-xl"
               value={selectedDivision}
               onChange={handleChangeDivision}
-              required
+              
             >
               <option value="" className="text-[15px]" disabled>
                 Select an option
@@ -250,27 +249,34 @@ const SignUp = () => {
         />
         <p>Create New Password</p>
         <input
-          type="text"
+          type="password"
           name="name"
-          id="name"
+          id="password"
           className="h-[50px] rounded-r-xl rounded-l-xl placeholder:text-[20px] placeholder:text-center p-5"
           placeholder="Password"
           value={password}
-            onChange={handlePasswordChange}
+          onChange={handlePasswordChange}
         />
-        
+
         <p>Confirm your Password</p>
         <input
-          type="text"
+          type="password"
           name="name"
-          id="name"
+          id="confirmPassword"
           className="h-[50px] rounded-r-xl rounded-l-xl placeholder:text-[20px] placeholder:text-center p-5"
           placeholder="Confirm Password"
           value={confirmPassword}
-            onChange={handleConfirmPasswordChange}
+          onChange={handleConfirmPasswordChange}
         />
 
-        <button type="submit" className="flex flex-row items-center mt-[14%] bg-white p-3 w-[140px] rounded-r-xl rounded-l-xl bg-[#E0D72E]" onClick={AddUser}>Sign Up <img src={SignupBtn} alt="" className="w-6 ml-5 h-65"/></button>
+        <button
+          type="button"
+          className="flex flex-row items-center mt-[14%] bg-white p-3 w-[140px] rounded-r-xl rounded-l-xl bg-[#E0D72E]"
+          onClick={AddUser}
+        >
+          Sign Up
+          <img src={SignupBtn} alt="" className="w-6 ml-5 h-65" />
+        </button>
       </div>
     </form>
   );
