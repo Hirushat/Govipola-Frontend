@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import logo from "../assets/Logo.png";
 import userImg from "../assets/user.png";
 import axios from "axios";
-import { Route } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
+
+import backBtn from '../assets/backBtn.png'
 
 const LoginPage = () => {
   const [selectedUsername, setUsername] = useState("");
@@ -55,8 +57,18 @@ const LoginPage = () => {
         <img src={logo} alt="Logo" className="h-[60px] w-[60px]" />
       </div>
 
+      <Link to="/">
+        <button className="mt-12 ml-[10%]">
+          <img
+            src={backBtn}
+            alt=""
+            className="h-[50px] w-[50px] ml-[5%] mt-[5%]"
+          />
+        </button>
+        </Link>
+
       {/* Main Content: User Image and Inputs */}
-      <div className="flex flex-col items-center mt-[10%]">
+      <div className="flex flex-col items-center mt-[7%]">
         <img src={userImg} alt="User Icon" className="h-[100px] w-[100px]" />
 
         {/* Username Input */}

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import BackBtn from "../assets/backBtn.png";
 import SignupBtn from "../../src/assets/signupBtn.png";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   const [selectedUser, setSelectedUser] = useState("");
@@ -127,14 +128,18 @@ const SignUp = () => {
 
   return (
     <form className="grid grid-cols-2 bg-gradient-to-b from-[#A5C9AF] via-[#749871] to-[#CCE887] h-screen">
-      <div className="flex flex-col px-[15%]">
-        <button>
+      <div className="flex flex-col px-[15%] mt-10">
+        
+        <Link to="/">
+        <button className="">
           <img
             src={BackBtn}
             alt=""
             className="h-[50px] w-[50px] ml-[5%] mt-[5%]"
           />
         </button>
+        </Link>
+        
 
         <div className="flex flex-col items-start ml-[5%] mt-[5%]">
           <label htmlFor="userType" className="mb-2 text-[25px] font-semibold">
@@ -236,7 +241,7 @@ const SignUp = () => {
         </div>
       </div>
 
-      <div className="flex flex-col  mt-[30%] gap-4 px-[15%]">
+      <div className="flex flex-col  mt-[32%] gap-4 px-[15%]">
         <p>User Name</p>
         <input
           type="text"
