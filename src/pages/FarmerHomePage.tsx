@@ -13,7 +13,7 @@ const FarmerHomePage = () => {
     <div className='bg-gradient-to-b from-[#E5AD2A] via-[#CC8A2E] to-[#B2A72A]'>
       <NavBar topic="Home"/>
       <Banner/>
-      <SelectOption img1={MillersBg} img2={BuyersBg} img3={MyStockBg} topic1="Miller" topic2="Buyer" topic3="My Stock"/>
+      <SelectOption path1="/miller-details" path2="/middleman-details" img1={MillersBg} img2={BuyersBg} img3={MyStockBg} topic1="Mills" topic2="Buyer" topic3="My Stock"/>
     </div>
   )
 }

@@ -25,7 +25,8 @@ function App() {
         <Route path="/middleman/homepage" element={<WholeSellerHomePage />} />
         <Route path="/userprofile" element={<UserProfile />} />
         <Route path="/miller-details" element={<MillersList />} /> 
-        <Route path="/middleman-details" element={<BuyersList />} />  
+        <Route path="/middleman-details" element={<BuyersList />} /> 
+        <Route path="/farmer-details" element={<BuyersList />} />  
       </Routes>
       </UserProvider>
     </div>

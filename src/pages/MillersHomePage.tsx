@@ -16,7 +16,7 @@ const MillersHomePage = () => {
         img1={MillersBg}
         img2={BuyersBg}
         img3={StockBg}
-        topic1="Miller"
+        topic1="Intermediate"
         topic2="Buyer"
         topic3="My Stock"
       />
