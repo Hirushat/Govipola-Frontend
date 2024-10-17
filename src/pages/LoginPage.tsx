@@ -71,10 +71,10 @@ const LoginPage = () => {
             navigate("/miller/homepage");
         }
       }else{
-        console.log("Password incorrect")
+        alert("Password incorrect")
       }
     }else{
-        console.log("username not exist")
+      alert("username not exist")
     }
     
   }
