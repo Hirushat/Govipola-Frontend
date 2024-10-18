@@ -9,7 +9,7 @@ import StockBg from "../assets/stockBg.png";
 
 const MillersHomePage = () => {
   return (
-    <div className="bg-gradient-to-b from-[#E5AD2A] via-[#CC8A2E] to-[#B2A72A] h-screen">
+    <div className="bg-gradient-to-b from-[#E5AD2A] via-[#CC8A2E] to-[#B2A72A] h-full">
       <NavBar topic="Home" />
       <Banner />
       <SelectOption
