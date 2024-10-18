@@ -55,7 +55,7 @@ const SignUp = () => {
 
       // Send POST request to the backend to add the user
       const response = await axios.post(
-        "http://localhost:8080/farmer/add-farmer",
+        "http://localhost:8080/user/add-user",
         userData
       );
       if (response.status === 200) {
@@ -99,7 +99,7 @@ const SignUp = () => {
 
       // Check if the username exists
       const response = await axios.get(
-        `http://localhost:8080/farmer/is-exist-user/${username}`
+        `http://localhost:8080/user/is-exist-user/${username}`
       );
 
       if (response.data === true) {

@@ -35,13 +35,13 @@ const LoginPage = () => {
 
     // Check if the username exists
     let response = await axios.get(
-      `http://localhost:8080/farmer/is-exist-user/${selectedUsername}`
+      `http://localhost:8080/user/is-exist-user/${selectedUsername}`
     );
 
     if (response.data === true) {
       // Fetch user details if username exists
       response = await axios.get(
-        `http://localhost:8080/farmer/find-by-username/${selectedUsername}`
+        `http://localhost:8080/user/find-by-username/${selectedUsername}`
       );
 
       // Destructuring the object

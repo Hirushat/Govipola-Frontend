@@ -16,7 +16,7 @@ const UserList = (props: any) => {
   async function getMillers() {
     try {
       const response = await axios.get(
-        `http://localhost:8080/farmer/get-all-${props.user}`
+        `http://localhost:8080/user/get-all-${props.user}`
       );
       setMillers(response.data);
     } catch (error) {
@@ -57,7 +57,7 @@ const UserList = (props: any) => {
       className="flex flex-col w-screen h-full bg-no-repeat bg-cover"
       style={{ backgroundImage: `url(${props.bg})` }}
     >
-      <NavBar topic="Buyer" />
+
       <Link to={getUserRoute()}>
         <button className="mt-12 ml-[10%]">
           <img
