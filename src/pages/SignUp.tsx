@@ -14,6 +14,8 @@ const SignUp = () => {
   const [city, setCity] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [id, setId] = useState("");
+  
   const [usernameExists, setUsernameExists] = useState(false);
 
   const [error, setError] = useState("");
@@ -43,6 +45,7 @@ const SignUp = () => {
 
       // Prepare data to send to the backend
       const userData = {
+        id: id,
         userType: selectedUser,
         name,
         address,
@@ -62,6 +65,7 @@ const SignUp = () => {
         setSuccess("User added successfully!");
         alert(success);
         // Clear the form after success
+        setId("");
         setSelectedUser("");
         setName("");
         setAddress("");
@@ -83,6 +87,7 @@ const SignUp = () => {
     try {
       // Check if any required field is empty
       if (
+        !id ||
         !selectedUser ||
         !name ||
         !address ||

@@ -46,8 +46,9 @@ const LoginPage = () => {
 
       // Destructuring the object
       const { passWord, phoneNumber, userType, id, name, address, city, divisionName } = response.data;
-      
       if(passWord === selectedPassword){
+
+        
         // Set user data in context
         setUser({ 
             username: selectedUsername, 
@@ -61,13 +62,13 @@ const LoginPage = () => {
           });
 
         if(userType === "farmer"){
-            console.log(userType)
+          
             navigate("/farmer/homepage");
         }else if(userType === "middleman"){
-            console.log(userType)
+            
             navigate("/middleman/homepage");
         }else{
-            console.log(userType)
+          
             navigate("/miller/homepage");
         }
       }else{

@@ -20,10 +20,12 @@ const SelectOption = (props: any) => {
         </button>
         </Link>
         
+        <Link to={props.path3}>
         <button className='relative flex items-center justify-center'>
             <img src={props.img3} alt="" />
             <span className="text-[30px] font-bold mb-2 absolute bg-white rounded-3xl px-5 py-1 opacity-[0.8] mt-10">{props.topic3}</span>
         </button>
+        </Link>
     </div>
   )
 }
