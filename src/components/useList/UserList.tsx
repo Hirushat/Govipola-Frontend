@@ -114,8 +114,7 @@ const UserList = (props: any) => {
                       Contact
                     </button>
                   </div>
-                  {/* Conditional rendering based on props.user */}
-                  {["farmers", "intermediate"].includes(props.user) && (
+             
                     <div>
                       <table className="rounded-lg shadow-md mx-auto mt-[5%]">
                         <thead>
@@ -159,7 +158,6 @@ const UserList = (props: any) => {
                         </tbody>
                       </table>
                     </div>
-                  )}
                 </div>
               );
             })
