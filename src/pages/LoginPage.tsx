@@ -64,7 +64,7 @@ const LoginPage = () => {
         if(userType === "farmer"){
           
             navigate("/farmer/homepage");
-        }else if(userType === "middleman"){
+        }else if(userType === "intermediate"){
             
             navigate("/middleman/homepage");
         }else{
