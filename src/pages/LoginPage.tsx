@@ -62,7 +62,6 @@ const LoginPage = () => {
           });
 
         if(userType === "farmer"){
-          
             navigate("/farmer/homepage");
         }else if(userType === "intermediate"){
             
